@@ -1,0 +1,28 @@
+name: verify
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install build tooling
+        run: python -m pip install --upgrade pip setuptools wheel
+      - name: Run rules and storage tests
+        run: python -m unittest discover -s tests -v
+      - name: Run offline character demo
+        run: python -m examples.offline_demo
+      - name: Compile package
+        run: python -m compileall -q rpg_character_rules examples
+      - name: Build wheel
+        run: python -m pip wheel . --no-deps --no-build-isolation --wheel-dir dist

@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rpg-character-rules-engine"
+version = "1.0.0"
+description = "Schema-driven RPG character sheets, ability rules, validation, and revision-safe storage."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE.md"]
+
+[tool.setuptools.packages.find]
+include = ["rpg_character_rules*"]
