@@ -60,6 +60,8 @@ class RulesEngine:
             return False, key_error
         rules = self._load_rules(rules_json)
         ability_rules = rules.get("ability_generation", {})
+        if not isinstance(ability_rules, dict):
+            ability_rules = {}
 
         budget = self._int_or_default(ability_rules.get("budget"), DEFAULT_POINT_BUY_BUDGET)
         minimum = self._int_or_default(ability_rules.get("min"), DEFAULT_POINT_BUY_MIN)
@@ -92,6 +94,8 @@ class RulesEngine:
             return False, key_error
         rules = self._load_rules(rules_json)
         ability_rules = rules.get("ability_generation", {})
+        if not isinstance(ability_rules, dict):
+            ability_rules = {}
         raw_array = ability_rules.get("array")
         if not isinstance(raw_array, list) or len(raw_array) != 6:
             array = DEFAULT_STANDARD_ARRAY
@@ -109,6 +113,8 @@ class RulesEngine:
         """Compute formatted ability modifier from score."""
         rules = self._load_rules(rules_json)
         derived = rules.get("derived", {})
+        if not isinstance(derived, dict):
+            derived = {}
         mode = derived.get("ability_mod")
         if mode != "5e_standard":
             mode = "5e_standard"

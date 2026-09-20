@@ -30,3 +30,13 @@ Follow `examples/offline_demo.py` to create a `CharacterStore`, apply abilities,
 This is a character-data and numeric-rules utility, not a complete tabletop ruleset. Valid abilities do not fill every field or prove a finished character. Default point-buy and standard-array profiles can be selected explicitly.
 
 Owned code is available under the [MIT license](LICENSE.md).
+
+## Compare the numeric policies
+
+Run `python -m examples.rules_demo` and inspect [the complete assignments and results](examples/rules-result.json). Three 15s and three 8s spend the default 27-point budget, but are not the standard array. Six 8s fail the default exact-budget policy; `require_exact_budget: false` explicitly permits unspent points. Standard-array validation compares the multiset, so assignments may place its six values in any abilities.
+
+`RulesEngine` falls back to defaults for unreadable rules JSON and malformed nested sections. That makes its default profile usable but is not strict rules-configuration validation: inspect custom policies before relying on them. All six ability keys are required, and scores must be integers rather than booleans or floats. Modifiers use floor division `(score - 10) // 2`.
+
+`CharacterSheet` owns validated field edits and revision advancement; `CharacterStore` persists JSON using an atomic file replacement. Its optimistic checks catch stale sequential edits, but the read/check/replace sequence is not a cross-process lock. Serialize writers externally. `verify()` checks a required profile, not every field or a full game's character legality; the demo intentionally reports 119 remaining blank fields.
+
+[Origin](ORIGIN.md) distinguishes the extraction from [Persistent Discord RPG](https://github.com/CinvanaAI/persistent-discord-rpg). Malformed-section handling and the policy comparison are public continuation work. Class/ancestry progression and a graphical character creator are possible future consumers, not provided behavior.

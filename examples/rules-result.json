@@ -1,0 +1,52 @@
+{
+  "assignments": {
+    "point_buy": {
+      "STR": 15,
+      "DEX": 15,
+      "CON": 15,
+      "INT": 8,
+      "WIS": 8,
+      "CHA": 8
+    },
+    "standard": {
+      "STR": 15,
+      "DEX": 14,
+      "CON": 13,
+      "INT": 12,
+      "WIS": 10,
+      "CHA": 8
+    },
+    "unspent": {
+      "STR": 8,
+      "DEX": 8,
+      "CON": 8,
+      "INT": 8,
+      "WIS": 8,
+      "CHA": 8
+    }
+  },
+  "point_buy_valid": [
+    true,
+    null
+  ],
+  "standard_array_valid": [
+    true,
+    null
+  ],
+  "point_buy_as_standard_array": [
+    false,
+    "Values must match standard array exactly: [15, 14, 13, 12, 10, 8]."
+  ],
+  "unspent_default": [
+    false,
+    "Total point-buy cost must equal 27 (got 0)."
+  ],
+  "unspent_allowed_explicitly": [
+    true,
+    null
+  ],
+  "malformed_section_fallback": [
+    true,
+    null
+  ]
+}
